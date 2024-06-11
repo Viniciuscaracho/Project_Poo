@@ -11,7 +11,7 @@ package com.mycompany.project_poo;
 public class Project_POO {
 
     public static void main(String[] args) {
-        
+         private static final String API_URL = "https://www.googleapis.com/auth/books";
        
     }
 }

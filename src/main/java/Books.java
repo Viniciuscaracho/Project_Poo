@@ -12,7 +12,7 @@ public class Books {
     private List<String> Autores;
     private String Editora;
     private boolean disponivelPdf;
-    private final double preco;
+    private double preco;
 
     public Books(String Titulo, List<String> Autores, String Editora, boolean disponivelPdf, double preco) {
         this.Titulo = Titulo;
@@ -57,7 +57,11 @@ public class Books {
     public void setDisponivelPdf(boolean disponivelPdf) {
         this.disponivelPdf = disponivelPdf;
     }
-
+    
+    private void setPreco(double preco){
+        this.preco = preco;
+    }
+    
     @Override
     public String toString() {
         return "Books{" + "Titulo=" + Titulo + ", Autores=" + Autores + ", Editora=" + Editora + ", disponivelPdf=" + disponivelPdf + ", preco=" + preco + '}';
