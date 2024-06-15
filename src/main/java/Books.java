@@ -2,36 +2,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONArray;
 /**
  *
  * @author pedro
  */
 public class Books {
-    private String Titulo;
-    private List<String> Autores;
-    private String Editora;
+    private String titulo;
+    private ArrayList<String> autores;
+    private String editora;
     private boolean disponivelPdf;
     private double preco;
 
-    public Books(String Titulo, List<String> Autores, String Editora, boolean disponivelPdf, double preco) {
-        this.Titulo = Titulo;
-        this.Autores = Autores;
-        this.Editora = Editora;
+    public Books(String titulo, List<String> autores, String editora, boolean disponivelPdf, double preco) {
+        this.titulo = titulo;
+        this.autores = (ArrayList<String>) autores;
+        this.editora = editora;
         this.disponivelPdf = disponivelPdf;
         this.preco = preco;
     }
 
     public String getTitulo() {
-        return Titulo;
+        return titulo;
     }
 
-    public List<String> getAutores() {
-        return Autores;
+    public ArrayList<String> getAutores(JSONArray arrayAutor) {
+        for (int i = 0; i < arrayAutor.length(); i++) {
+            autores.add(arrayAutor.getString(i));
+        }
+        return autores;
     }
 
     public String getEditora() {
-        return Editora;
+        return editora;
     }
 
     public boolean isDisponivelPdf() {
@@ -42,16 +47,16 @@ public class Books {
         return preco;
     }
 
-    public void setTitulo(String Titulo) {
-        this.Titulo = Titulo;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public void setAutores(List<String> Autores) {
-        this.Autores = Autores;
+    public void setAutores(List<String> autores) {
+        this.autores = (ArrayList<String>) autores;
     }
 
-    public void setEditora(String Editora) {
-        this.Editora = Editora;
+    public void setEditora(String editora) {
+        this.editora = editora;
     }
 
     public void setDisponivelPdf(boolean disponivelPdf) {
@@ -64,7 +69,7 @@ public class Books {
     
     @Override
     public String toString() {
-        return "Books{" + "Titulo=" + Titulo + ", Autores=" + Autores + ", Editora=" + Editora + ", disponivelPdf=" + disponivelPdf + ", preco=" + preco + '}';
+        return "Books{" + "titulo=" + titulo + ", autores=" + autores + ", editora=" + editora + ", disponivelPdf=" + disponivelPdf + ", preco=" + preco + '}';
     }
     
     
