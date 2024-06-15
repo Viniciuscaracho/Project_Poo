@@ -6,6 +6,8 @@
 
 import java.awt.print.Book;
 import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
@@ -29,21 +31,27 @@ public class ProjectPOO {
 
     
     private List<Books> parseBook(String resposta){
-        Books livros = new Books;
         List<Books> parseBook = new ArrayList<>();
         JSONObject object = new JSONObject(resposta);
-        JSONArray items = JSONObject.getJSONArray("items");
+        JSONArray items = object.getJSONArray("items");
         
         for (int i = 0; i < items.length(); i++) {
-            JSONObject volumeInfo = items.get("volumeInfo");
+            JSONObject item = items.getJSONObject(i);
+            JSONObject volumeInfo = item.getJSONObject("volumeInfo");
             String titulo = volumeInfo.getString("title");
-            ArrayList<String> autores = volumeInfo.has("authors") ? Books.getAutores(volumeInfo.getJSONArray("authors")) : new ArrayList<>();
+            ArrayList<String> autores = new ArrayList<>();
+            if (volumeInfo.has("authors")) {
+                JSONArray teste = volumeInfo.getJSONArray("authors");
+                for (int j = 0; j < teste.length(); j++) {
+                    autores.add(teste.getString(j));
+                }
+            }
             String editora = volumeInfo.has("publisher") ? volumeInfo.getString("publisher") : "Editora Desconhecida";
             Boolean disponivelPdf = volumeInfo.has("pdf") && volumeInfo.getJSONObject("pdf").getBoolean("Esta Disponivel");
             double preco = volumeInfo.has("saleInfo") && volumeInfo.getJSONObject("saleInfo").getJSONObject("retailPrice").has("amount") ?
             volumeInfo.getJSONObject("saleInfo").getJSONObject("retailPrice").getDouble("amount") : 0.0;
             
-            parseBook.add(new Book(titulo,autores,editora,disponivelPdf,preco));
+            parseBook.add(new Books(titulo, autores,editora,disponivelPdf,preco));
         }
         return parseBook;
     }
@@ -51,13 +59,14 @@ public class ProjectPOO {
     private String buildUrl(String query, int maxResults, int startIndex){
        StringBuilder url = new StringBuilder(API_URL);
     
-        url.append("?q=").append(URI.create(query).toString());
+        url.append("?q=").append(URLEncoder.encode(query, StandardCharsets.UTF_8));
         if (maxResults > 0 && maxResults <= 40) {
             url.append("&maxResults=").append(maxResults);
         }
-        if (startIndex > 0) {
+        if (startIndex >= 0) {
             url.append("&startIndex=").append(startIndex);
         }
         return url.toString();
     }
+}
 

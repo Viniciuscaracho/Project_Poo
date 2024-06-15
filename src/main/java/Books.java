@@ -13,12 +13,12 @@ public class Books {
     private String titulo;
     private ArrayList<String> autores;
     private String editora;
-    private boolean disponivelPdf;
+    private Boolean disponivelPdf;
     private double preco;
 
-    public Books(String titulo, List<String> autores, String editora, boolean disponivelPdf, double preco) {
+    public Books(String titulo, ArrayList<String> autores, String editora, Boolean disponivelPdf, double preco) {
         this.titulo = titulo;
-        this.autores = (ArrayList<String>) autores;
+        this.autores = autores;
         this.editora = editora;
         this.disponivelPdf = disponivelPdf;
         this.preco = preco;
@@ -59,11 +59,11 @@ public class Books {
         this.editora = editora;
     }
 
-    public void setDisponivelPdf(boolean disponivelPdf) {
+    public void setDisponivelPdf(Boolean disponivelPdf) {
         this.disponivelPdf = disponivelPdf;
     }
     
-    private void setPreco(double preco){
+    public void setPreco(double preco){
         this.preco = preco;
     }
     

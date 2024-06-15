@@ -1,4 +1,6 @@
 
+import java.awt.print.Book;
+import java.util.List;
 import po23s.http.ClienteHttp;
 
 /*
@@ -12,8 +14,14 @@ import po23s.http.ClienteHttp;
  */
 public class main {
     public static void main(String[] args) {
-        ClienteHttp cliente = new ClienteHttp();
-        System.out.println(cliente.buscaDados("https://www.googleapis.com/books/v1/volumes?q=java"));
+        ProjectPOO googleBooksApi = new ProjectPOO();
+        String query = "Sistemas Operacionais com Java"; // Consulta de exemplo
+        List<Books> books = googleBooksApi.searchBooks(query, 10, 0);
+
+        
+        for (Books book : books) {
+            System.out.println(book);
+        }
              
     }
 }
