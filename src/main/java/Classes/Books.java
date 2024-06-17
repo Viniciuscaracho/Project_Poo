@@ -1,4 +1,4 @@
-/*
+package Classes;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -69,7 +69,7 @@ public class Books {
     
     @Override
     public String toString() {
-        return "Books{" + "titulo=" + titulo + ", autores=" + autores + ", editora=" + editora + ", disponivelPdf=" + disponivelPdf + ", preco=" + preco + '}';
+        return "Classes.Books{" + "titulo=" + titulo + ", autores=" + autores + ", editora=" + editora + ", disponivelPdf=" + disponivelPdf + ", preco=" + preco + '}';
     }
     
     

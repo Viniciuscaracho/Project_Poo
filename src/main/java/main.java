@@ -1,7 +1,8 @@
 
-import java.awt.print.Book;
 import java.util.List;
-import po23s.http.ClienteHttp;
+
+import Classes.Books;
+import Classes.ProjectPOO;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
