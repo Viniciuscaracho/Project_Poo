@@ -3,7 +3,6 @@ package Frames;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import Classes.Books;
 import Classes.ProjectPOO;
 
@@ -13,7 +12,6 @@ import Classes.ProjectPOO;
  */
 public class BookJDialog extends javax.swing.JDialog {
     private final ProjectPOO googleBooksApi;
-    private JScrollPane scrollPane;
     
     /**
      * Creates new form BookJDialog
@@ -116,7 +114,7 @@ public class BookJDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    String query = jTextField1.getText();
+        String query = jTextField1.getText();
         int maxResults;
         try {
             maxResults = Integer.parseInt(jTextField2.getText());
@@ -131,15 +129,22 @@ public class BookJDialog extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "No books found for the query: " + query);
             return;
         }
-        
+
         jPanel1.removeAll();
 
         for (Books book : books) {
-            JLabel bookLabel = new JLabel("<html><b>Título:</b> " + book.getTitulo() +
-                                          "<br/><b>Editora:</b> " + book.getEditora() + 
-                                          "<br/><b>Preço:</b> " + book.getPreco() + 
-                                          "</html>");
-            jPanel1.add(bookLabel);
+            StringBuilder autoresStr = new StringBuilder();
+            for (String autor : book.getAutores()) {
+                autoresStr.append(autor).append(", ");
+            }
+            autoresStr.delete(autoresStr.length() - 2, autoresStr.length()); 
+
+            JLabel labelLivro = new JLabel("<html><b>Título:</b> " + book.getTitulo() +
+                                           "<br/><b>Editora:</b> " + book.getEditora() + 
+                                           "<br/><b>Autores:</b> " + autoresStr.toString() + 
+                                           "<br/><b>Preço:</b> " + book.getPreco() + 
+                                           "</html>");
+            jPanel1.add(labelLivro);
         }
 
         jPanel1.revalidate();

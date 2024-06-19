@@ -40,14 +40,14 @@ public class ProjectPOO {
             String titulo = volumeInfo.getString("title");
             ArrayList<String> autores = new ArrayList<>();
             if (volumeInfo.has("authors")) {
-                JSONArray teste = volumeInfo.getJSONArray("authors");
-                for (int j = 0; j < teste.length(); j++) {
-                    autores.add(teste.getString(j));
+                JSONArray autoresArray = volumeInfo.getJSONArray("authors");
+                for (int j = 0; j < autoresArray.length(); j++) {
+                    autores.add(autoresArray.getString(j));
                 }
             }
             String editora = volumeInfo.has("publisher") ? volumeInfo.getString("publisher") : "Editora Desconhecida";
             Boolean disponivelPdf = volumeInfo.has("pdf") && volumeInfo.getJSONObject("pdf").getBoolean("Esta Disponivel");
-             double preco = 0.0;
+            double preco = 0.0;
             if (item.has("saleInfo")) {
                 JSONObject saleInfo = item.getJSONObject("saleInfo");
                 if (saleInfo.has("retailPrice")) {
@@ -57,8 +57,8 @@ public class ProjectPOO {
                     }
                 }
             }
-            
-            parseBook.add(new Books(titulo, autores,editora,disponivelPdf,preco));
+
+            parseBook.add(new Books(titulo, autores, editora, disponivelPdf, preco));
         }
         return parseBook;
     }
