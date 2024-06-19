@@ -19,7 +19,7 @@ public class main {
         String query = "Java"; // Consulta de exemplo
         List<Books> books = googleBooksApi.searchBooks(query, 10, 0);
 
-        
+         
         for (Books book : books) {
             System.out.println(book);
         }

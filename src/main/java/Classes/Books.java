@@ -28,10 +28,7 @@ public class Books {
         return titulo;
     }
 
-    public ArrayList<String> getAutores(JSONArray arrayAutor) {
-        for (int i = 0; i < arrayAutor.length(); i++) {
-            autores.add(arrayAutor.getString(i));
-        }
+    public ArrayList<String> getAutores() {
         return autores;
     }
 

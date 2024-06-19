@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import Classes.Books;
 import Classes.ProjectPOO;
+import org.json.JSONArray;
 
 /**
  *
@@ -136,6 +137,9 @@ public class BookJDialog extends javax.swing.JDialog {
             StringBuilder autoresStr = new StringBuilder();
             for (String autor : book.getAutores()) {
                 autoresStr.append(autor).append(", ");
+            }
+            if (autoresStr.length() > 0) {
+                autoresStr.setLength(autoresStr.length() - 2); // Remove the last comma and space
             }
             autoresStr.delete(autoresStr.length() - 2, autoresStr.length()); 
 
