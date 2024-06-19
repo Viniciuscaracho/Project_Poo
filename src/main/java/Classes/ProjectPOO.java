@@ -45,6 +45,9 @@ public class ProjectPOO {
                     autores.add(autoresArray.getString(j));
                 }
             }
+            else{
+                autores.add("Autores Desconhecidos");
+            }
             String editora = volumeInfo.has("publisher") ? volumeInfo.getString("publisher") : "Editora Desconhecida";
             Boolean disponivelPdf = volumeInfo.has("pdf") && volumeInfo.getJSONObject("pdf").getBoolean("Esta Disponivel");
             double preco = 0.0;
