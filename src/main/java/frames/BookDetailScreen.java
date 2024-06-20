@@ -5,11 +5,16 @@
 package frames;
 
 import Classes.Book;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Frame;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JDialog;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -23,21 +28,39 @@ public class BookDetailScreen extends JFrame {
     /**
      * Creates new form BookDetailScream
      */
-    public BookDetailScreen(Frame par, boolean par1, Book book) {
-       
+    public BookDetailScreen(Frame par, boolean par1, Book book){
+
         initComponents();
         this.book = book;
-        labelTitulo.setText(book.getTitulo());
-         StringBuilder autoresStr = new StringBuilder();
+        setTitle("Titulo: " + book.getTitulo());
+        StringBuilder autoresStr = new StringBuilder();
         List<String> autores = book.getAutores();
-        
+
         for (String autor : autores) {
             autoresStr.append(autor).append(", ");
         }
         autoresStr.setLength(autoresStr.length() - 2);
         labelAutor.setText(autoresStr.toString());
         labelEditora.setText(book.getEditora());
-        labelPreco.setText(String.format("%.2f",book.getPreco()));
+        labelPreco.setText(String.format("%.2f", book.getPreco()));
+        URL url;
+        try {
+            url = new URL(book.getImagem());
+            ImageIcon imageIcon = new ImageIcon(url);
+            jLabel6.setIcon(imageIcon);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BookDetailScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(book.isDisponivelPdf() == true){
+            labelPdf.setText("Possui PDF");
+        }
+        else{
+            labelPdf.setText("Nao Possui PDF");
+        }
+        
+
+        
+
     }
 
     /**
@@ -50,23 +73,19 @@ public class BookDetailScreen extends JFrame {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        labelTitulo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         labelAutor = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         labelEditora = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         labelPreco = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        labelPdf = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jLabel1.setText("Tiulo:");
-
-        labelTitulo.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        labelTitulo.setText("jLabel2");
 
         jLabel2.setText("Autor(es):");
 
@@ -83,6 +102,11 @@ public class BookDetailScreen extends JFrame {
         labelPreco.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         labelPreco.setText("jLabel6");
 
+        jLabel1.setText("PDF:");
+
+        labelPdf.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        labelPdf.setText("jLabel7");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,10 +114,6 @@ public class BookDetailScreen extends JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelTitulo))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -105,29 +125,39 @@ public class BookDetailScreen extends JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelPreco)))
-                .addContainerGap(273, Short.MAX_VALUE))
+                        .addComponent(labelPreco))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelPdf)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(labelTitulo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(labelAutor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(labelEditora))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(labelPreco))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(labelAutor))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(labelEditora))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(labelPreco))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(labelPdf))
+                        .addGap(0, 121, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -162,16 +192,16 @@ public class BookDetailScreen extends JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-      EventQueue.invokeLater(() -> {
+        EventQueue.invokeLater(() -> {
             ArrayList<String> authors = new ArrayList<>();
             authors.add("Author 1");
             authors.add("Author 2");
 
-            Book book = new Book("Example Title", authors, "Example Publisher", true, 100.0);
+            Book book = new Book("Example Title", authors, "Example Publisher", true, 100.0, "https://drive.usercontent.google.com/download?id=15tzOCQdSRGg_wcwa-3TnpS2zt2hTHaMI&authuser=0&confirm=t&uuid=e7d297b8-bf30-49d6-bd25-c0cbdbc140bf&at=APZUnTWC7Q_RZ5u--BGCMZLVqgup:1718315906981");
             BookDetailScreen dialog = new BookDetailScreen(null, true, book);
             dialog.setVisible(true);
         });
-         
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -180,9 +210,10 @@ public class BookDetailScreen extends JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel labelAutor;
     private javax.swing.JLabel labelEditora;
+    private javax.swing.JLabel labelPdf;
     private javax.swing.JLabel labelPreco;
-    private javax.swing.JLabel labelTitulo;
     // End of variables declaration//GEN-END:variables
 }

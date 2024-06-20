@@ -60,8 +60,15 @@ public class ProjectPOO {
                     }
                 }
             }
+            String smallThumbnail = "https://drive.usercontent.google.com/download?id=15tzOCQdSRGg_wcwa-3TnpS2zt2hTHaMI&authuser=0&confirm=t&uuid=e7d297b8-bf30-49d6-bd25-c0cbdbc140bf&at=APZUnTWC7Q_RZ5u--BGCMZLVqgup:1718315906981";
+            if(volumeInfo.has("imageLinks")){
+                JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+                if(imageLinks.has("smallThumbnail")){
+                    smallThumbnail = imageLinks.getString("smallThumbnail");
+                }
+            }
 
-            parseBook.add(new Book(titulo, autores, editora, disponivelPdf, preco));
+            parseBook.add(new Book(titulo, autores, editora, disponivelPdf, preco,smallThumbnail));
         }
         return parseBook;
     }

@@ -15,13 +15,15 @@ public class Book {
     private String editora;
     private Boolean disponivelPdf;
     private double preco;
+    private String imagem;
 
-    public Book(String titulo, ArrayList<String> autores, String editora, Boolean disponivelPdf, double preco) {
+    public Book(String titulo, ArrayList<String> autores, String editora, Boolean disponivelPdf, double preco,String imagem) {
         this.titulo = titulo;
         this.autores = autores;
         this.editora = editora;
         this.disponivelPdf = disponivelPdf;
         this.preco = preco;
+        this.imagem = imagem;
     }
 
     public String getTitulo() {
@@ -62,6 +64,14 @@ public class Book {
     
     public void setPreco(double preco){
         this.preco = preco;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
     
     @Override

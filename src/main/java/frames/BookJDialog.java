@@ -20,6 +20,7 @@ public class BookJDialog extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    
 
     public BookJDialog() {
         super();
@@ -36,7 +37,6 @@ public class BookJDialog extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelBooks = new javax.swing.JPanel(); // Alterado para jPanelBooks
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("BookSearch");
@@ -122,7 +122,7 @@ public class BookJDialog extends javax.swing.JFrame {
         }
 
         jPanelBooks.removeAll();
-
+        
         for (Book book : books) {
             JPanel bookPanel = new JPanel();
             bookPanel.setLayout(new GridLayout(0, 1));
@@ -137,10 +137,7 @@ public class BookJDialog extends javax.swing.JFrame {
             
 
             JLabel titleLabel = new JLabel("Título: " + book.getTitulo());
-            JLabel publisherLabel = new JLabel("Editora: " + book.getEditora());
-            JLabel authorsLabel = new JLabel("Autor(es): " + autoresStr);
-            JLabel priceLabel = new JLabel("Preço: R$ " + String.format("%.2f", book.getPreco()));
-
+            
             JButton detailsButton = new JButton("Detalhes");
             detailsButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
@@ -149,9 +146,6 @@ public class BookJDialog extends javax.swing.JFrame {
             });
 
             bookPanel.add(titleLabel);
-            bookPanel.add(publisherLabel);
-            bookPanel.add(authorsLabel);
-            bookPanel.add(priceLabel);
             bookPanel.add(detailsButton);
 
             jPanelBooks.add(bookPanel);
