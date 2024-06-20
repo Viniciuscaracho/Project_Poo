@@ -1,8 +1,6 @@
-package Frames;
+package frames;
 
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,10 +8,10 @@ import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import Classes.Books;
+import Classes.Book;
 import Classes.ProjectPOO;
 
-public class BookJDialog extends javax.swing.JDialog {
+public class BookJDialog extends javax.swing.JFrame {
     private final ProjectPOO googleBooksApi;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -23,8 +21,8 @@ public class BookJDialog extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
 
-    public BookJDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public BookJDialog() {
+        super();
         initComponents();
         googleBooksApi = new ProjectPOO();
     }
@@ -116,7 +114,7 @@ public class BookJDialog extends javax.swing.JDialog {
             return;
         }
 
-        List<Books> books = googleBooksApi.searchBooks(query, maxResults, 0);
+        List<Book> books = googleBooksApi.searchBooks(query, maxResults, 0);
 
         if (books.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Nenhum livro encontrado para a consulta: " + query);
@@ -125,20 +123,18 @@ public class BookJDialog extends javax.swing.JDialog {
 
         jPanelBooks.removeAll();
 
-        for (Books book : books) {
+        for (Book book : books) {
             JPanel bookPanel = new JPanel();
             bookPanel.setLayout(new GridLayout(0, 1));
 
             StringBuilder autoresStr = new StringBuilder();
             List<String> autores = book.getAutores();
-            if (autores.isEmpty()) {
-                autoresStr.append("N/A");
-            } else {
+           
                 for (String autor : autores) {
                     autoresStr.append(autor).append(", ");
                 }
                 autoresStr.setLength(autoresStr.length() - 2);
-            }
+            
 
             JLabel titleLabel = new JLabel("Título: " + book.getTitulo());
             JLabel publisherLabel = new JLabel("Editora: " + book.getEditora());
@@ -148,7 +144,7 @@ public class BookJDialog extends javax.swing.JDialog {
             JButton detailsButton = new JButton("Detalhes");
             detailsButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    openBookDetailsDialog(book);
+                    openBookDetailScreen(book);
                 }
             });
 
@@ -165,8 +161,9 @@ public class BookJDialog extends javax.swing.JDialog {
         jPanelBooks.repaint();
     }
 
-    private void openBookDetailsDialog(Books book) {
-        BookDetailDialog dialog = new BookDetailDialog((Frame) this.getParent(), true, book);
+    private void openBookDetailScreen(Book book) {
+        System.out.println("open");
+        BookDetailScreen dialog = new BookDetailScreen(this, true, book);
         dialog.setVisible(true);
     }
 
@@ -190,13 +187,8 @@ public class BookJDialog extends javax.swing.JDialog {
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                BookJDialog dialog = new BookJDialog(new JFrame(), true);
-                dialog.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
+                BookJDialog dialog = new BookJDialog();
+                dialog.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 dialog.setVisible(true);
             }
         });

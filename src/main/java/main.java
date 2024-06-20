@@ -1,7 +1,7 @@
 
 import java.util.List;
 
-import Classes.Books;
+import Classes.Book;
 import Classes.ProjectPOO;
 
 /*
@@ -17,10 +17,10 @@ public class main {
     public static void main(String[] args) {
         ProjectPOO googleBooksApi = new ProjectPOO();
         String query = "Java";
-        List<Books> books = googleBooksApi.searchBooks(query, 10, 0);
+        List<Book> books = googleBooksApi.searchBooks(query, 10, 0);
 
          
-        for (Books book : books) {
+        for (Book book : books) {
             System.out.println(book);
         }
              

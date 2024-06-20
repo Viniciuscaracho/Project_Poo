@@ -9,14 +9,14 @@ import org.json.JSONArray;
  *
  * @author pedro
  */
-public class Books {
+public class Book {
     private String titulo;
     private ArrayList<String> autores;
     private String editora;
     private Boolean disponivelPdf;
     private double preco;
 
-    public Books(String titulo, ArrayList<String> autores, String editora, Boolean disponivelPdf, double preco) {
+    public Book(String titulo, ArrayList<String> autores, String editora, Boolean disponivelPdf, double preco) {
         this.titulo = titulo;
         this.autores = autores;
         this.editora = editora;

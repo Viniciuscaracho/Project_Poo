@@ -21,7 +21,7 @@ import po23s.http.ClienteHttp;
 public class ProjectPOO {
     private static final String API_URL = "https://www.googleapis.com/books/v1/volumes";
     
-    public List<Books> searchBooks(String query, int maxResults, int startIndex) {
+    public List<Book> searchBooks(String query, int maxResults, int startIndex) {
         ClienteHttp cliente = new ClienteHttp();
         String url = buildUrl(query, maxResults, startIndex);
         String resposta = cliente.buscaDados(url);
@@ -29,8 +29,8 @@ public class ProjectPOO {
     }
 
     
-    private List<Books> parseBook(String resposta){
-        List<Books> parseBook = new ArrayList<>();
+    private List<Book> parseBook(String resposta){
+        List<Book> parseBook = new ArrayList<>();
         JSONObject object = new JSONObject(resposta);
         JSONArray items = object.getJSONArray("items");
         
@@ -61,7 +61,7 @@ public class ProjectPOO {
                 }
             }
 
-            parseBook.add(new Books(titulo, autores, editora, disponivelPdf, preco));
+            parseBook.add(new Book(titulo, autores, editora, disponivelPdf, preco));
         }
         return parseBook;
     }
