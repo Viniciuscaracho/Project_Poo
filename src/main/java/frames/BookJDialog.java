@@ -20,7 +20,6 @@ public class BookJDialog extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    
 
     public BookJDialog() {
         super();
@@ -36,7 +35,7 @@ public class BookJDialog extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanelBooks = new javax.swing.JPanel(); // Alterado para jPanelBooks
+        jPanelBooks = new javax.swing.JPanel();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("BookSearch");
@@ -57,7 +56,7 @@ public class BookJDialog extends javax.swing.JFrame {
             }
         });
 
-        jPanelBooks.setLayout(new BoxLayout(jPanelBooks, BoxLayout.Y_AXIS)); // Definindo o layout vertical
+        jPanelBooks.setLayout(new BoxLayout(jPanelBooks, BoxLayout.Y_AXIS));
 
         jScrollPane1.setViewportView(jPanelBooks);
 
@@ -122,22 +121,28 @@ public class BookJDialog extends javax.swing.JFrame {
         }
 
         jPanelBooks.removeAll();
-        
+
+        int maxTitleLength = 150;
+
         for (Book book : books) {
             JPanel bookPanel = new JPanel();
             bookPanel.setLayout(new GridLayout(0, 1));
 
             StringBuilder autoresStr = new StringBuilder();
             List<String> autores = book.getAutores();
-           
-                for (String autor : autores) {
-                    autoresStr.append(autor).append(", ");
-                }
-                autoresStr.setLength(autoresStr.length() - 2);
-            
 
-            JLabel titleLabel = new JLabel("Título: " + book.getTitulo());
-            
+            for (String autor : autores) {
+                autoresStr.append(autor).append(", ");
+            }
+            autoresStr.setLength(autoresStr.length() - 2);
+
+            String titulo = book.getTitulo();
+            if (titulo.length() > maxTitleLength) {
+                titulo = titulo.substring(0, maxTitleLength) + "...";
+            }
+
+            JLabel titleLabel = new JLabel("Título: " + titulo);
+
             JButton detailsButton = new JButton("Detalhes");
             detailsButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
