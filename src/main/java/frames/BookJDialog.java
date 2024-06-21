@@ -108,6 +108,11 @@ public class BookJDialog extends javax.swing.JFrame {
         int maxResults;
         try {
             maxResults = Integer.parseInt(jTextField2.getText());
+            if(maxResults < 0){
+                JOptionPane.showMessageDialog(this, "Por favor, insira um número válido para o máximo de resultados.");
+                return;
+            }
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Por favor, insira um número válido para o máximo de resultados.");
             return;

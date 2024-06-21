@@ -27,8 +27,6 @@ public class ProjectPOO {
     }
 
     
-    
-    
     private String buildUrl(String query, int maxResults, int startIndex){
        StringBuilder url = new StringBuilder(API_URL);
     
